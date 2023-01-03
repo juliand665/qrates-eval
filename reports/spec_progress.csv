@@ -1,0 +1,290 @@
+receiver,call target,reason if incomplete
+
+core::result::Result,core::ops::try_trait::Try::branch,
+core::result::Result,core::ops::try_trait::FromResidual::from_residual,
+core::option::Option,core::ops::try_trait::Try::branch,
+core::option::Option,core::ops::try_trait::FromResidual::from_residual,
+
+*,core::clone::Clone::clone,
+
+T,core::default::Default::default,
+
+# impl Option
+,core::option::Option<T>::is_some,
+,core::option::Option<T>::is_none,
+,core::option::Option<T>::as_ref,refs
+,core::option::Option<T>::as_mut,refs
+,core::option::Option<T>::as_pin_ref,refs
+,core::option::Option<T>::as_pin_mut,refs
+,core::option::Option<T>::expect,
+,core::option::Option<T>::unwrap,
+,core::option::Option<T>::unwrap_or,
+,core::option::Option<T>::unwrap_or_else,calls
+,core::option::Option<T>::unwrap_or_default,calls
+,core::option::Option<T>::unwrap_unchecked,
+,core::option::Option<T>::map,calls
+,core::option::Option<T>::map_or,calls
+,core::option::Option<T>::map_or_else,calls
+,core::option::Option<T>::ok_or,
+,core::option::Option<T>::ok_or_else,calls
+,core::option::Option<T>::as_deref,"refs, calls"
+,core::option::Option<T>::as_deref_mut,"refs, calls"
+,core::option::Option<T>::and,
+,core::option::Option<T>::and_then,calls
+,core::option::Option<T>::filter,calls
+,core::option::Option<T>::or,
+,core::option::Option<T>::or_else,calls
+,core::option::Option<T>::xor,
+,core::option::Option<T>::insert,
+,core::option::Option<T>::get_or_insert,
+,core::option::Option<T>::get_or_insert_with,calls
+,core::option::Option<T>::take,
+,core::option::Option<T>::replace,
+,core::option::Option<T>::zip,
+
+# impl Result
+,"core::result::Result<T, E>::is_ok",
+,"core::result::Result<T, E>::is_err",
+,"core::result::Result<T, E>::ok",
+,"core::result::Result<T, E>::err",
+,"core::result::Result<T, E>::as_ref",refs
+,"core::result::Result<T, E>::as_mut",refs
+,"core::result::Result<T, E>::map",calls
+,"core::result::Result<T, E>::map_or",calls
+,"core::result::Result<T, E>::map_or_else",calls
+,"core::result::Result<T, E>::map_err",calls
+,"core::result::Result<T, E>::as_deref","refs, calls"
+,"core::result::Result<T, E>::as_deref_mut","refs, calls"
+,"core::result::Result<T, E>::expect",
+,"core::result::Result<T, E>::unwrap",
+,"core::result::Result<T, E>::unwrap_or_default",calls
+,"core::result::Result<T, E>::expect_err",
+,"core::result::Result<T, E>::unwrap_err",
+,"core::result::Result<T, E>::and",
+,"core::result::Result<T, E>::and_then",calls
+,"core::result::Result<T, E>::or",
+,"core::result::Result<T, E>::or_else",calls
+,"core::result::Result<T, E>::unwrap_or",
+,"core::result::Result<T, E>::unwrap_or_else",calls
+,"core::result::Result<T, E>::unwrap_unchecked",
+,"core::result::Result<T, E>::unwrap_err_unchecked",
+
+# synthesized macro expansion stuff
+#,quote::__private::push_ident,synthesized
+#,quote::__private::push_colon2,synthesized
+#,quote::__private::push_group,synthesized
+#,quote::__private::push_comma,synthesized
+#,quote::__private::push_ident_spanned,synthesized
+#,quote::__private::push_lt,synthesized
+#,quote::__private::push_gt,synthesized
+#,quote::__private::push_colon,synthesized
+#,quote::__private::push_colon2_spanned,synthesized
+#,quote::__private::push_semi,synthesized
+#,quote::__private::push_and,synthesized
+#,quote::__private::push_eq,synthesized
+#,quote::__private::push_dot,synthesized
+#,quote::__private::push_group_spanned,synthesized
+#,quote::__private::push_pound,synthesized
+#,quote::__private::push_rarrow,synthesized
+#,quote::__private::push_fat_arrow,synthesized
+#,quote::__private::push_bang,synthesized
+#,quote::__private::push_dot_spanned,synthesized
+#,quote::__private::push_lifetime,synthesized
+#,quote::__private::push_or,synthesized
+#,quote::__private::push_underscore,synthesized
+#,quote::__private::push_comma_spanned,synthesized
+#,quote::__private::push_semi_spanned,synthesized
+#,quote::__private::push_star,synthesized
+#,quote::__private::push_add,synthesized
+#,quote::__private::push_shr,synthesized
+#,quote::__private::push_lt_spanned,synthesized
+#,quote::__private::push_colon_spanned,synthesized
+#,quote::__private::push_and_spanned,synthesized
+#,quote::__private::push_eq_spanned,synthesized
+#,quote::__private::push_gt_spanned,synthesized
+#,quote::__private::push_dot2,synthesized
+#,quote::__private::push_fat_arrow_spanned,synthesized
+#,quote::__private::push_question_spanned,synthesized
+#,quote::__private::push_bang_spanned,synthesized
+#,quote::__private::push_or_spanned,synthesized
+#,quote::__private::push_question,synthesized
+#,quote::__private::push_rarrow_spanned,synthesized
+#,quote::__private::push_underscore_spanned,synthesized
+#,quote::__private::push_pound_spanned,synthesized
+#,quote::__private::push_lifetime_spanned,synthesized
+#,quote::__private::push_eq_eq,synthesized
+#,quote::__private::push_or_or,synthesized
+#,quote::__private::push_at,synthesized
+#,quote::__private::push_star_spanned,synthesized
+#,quote::__private::push_or_or_spanned,synthesized
+#,quote::__private::push_shr_spanned,synthesized
+#,quote::__private::push_add_spanned,synthesized
+#,quote::__private::push_shl,synthesized
+#,quote::__private::push_and_and,synthesized
+#,quote::__private::push_eq_eq_spanned,synthesized
+#,quote::__private::push_and_and_spanned,synthesized
+#,quote::__private::push_ne,synthesized
+#,quote::__private::push_add_eq,synthesized
+#,quote::__private::push_sub,synthesized
+#,quote::__private::push_rem,synthesized
+#,quote::__private::push_and_eq,synthesized
+#,quote::__private::push_div,synthesized
+#,quote::__private::push_dot3,synthesized
+#,quote::__private::push_ne_spanned,synthesized
+#,quote::__private::push_rem_spanned,synthesized
+#,quote::__private::push_shl_spanned,synthesized
+#,quote::__private::push_ge,synthesized
+#,quote::__private::push_or_eq,synthesized
+#,quote::__private::push_sub_eq,synthesized
+#,quote::__private::push_dot2_spanned,synthesized
+#,quote::__private::push_caret,synthesized
+#,quote::__private::push_caret_spanned,synthesized
+#,quote::__private::push_dot_dot_eq_spanned,synthesized
+# creates a new TokenStream to push tokens to (TODO: which type this is defined in; not sure why it's not being recognized)
+#,proc_macro2::TokenStream::new,synthesized
+
+# synthesized by a popular crate
+#,libsecp256k1_core::field::FieldStorage::new,synthesized
+#,libsecp256k1_core::group::AffineStorage::new,synthesized
+
+# special handling by prusti
+,&[T]::len,builtin
+,core::panicking::panic,builtin
+,core::panicking::assert_failed,builtin
+,std::panicking::begin_panic,builtin
+,core::panicking::panic_fmt,builtin
+
+# would be interesting as part of a more general story for strings
+alloc::string::String,core::ops::deref::Deref::deref,strings
+str,core::cmp::PartialEq::eq,strings
+str,core::ops::index::Index::index,strings
+
+# requires handling interior mutability (Arc, Pin, etc.)
+alloc::sync::Arc,core::ops::deref::Deref::deref,interior_mutability
+,alloc::sync::Arc<T>::new,interior_mutability
+,core::pin::Pin<P>::new_unchecked,interior_mutability
+,core::pin::Pin<P>::as_mut,interior_mutability
+,core::pin::Pin<&T>::get_unchecked_mut,interior_mutability
+core::pin::Pin,core::ops::deref::DerefMut::deref_mut,interior_mutability
+
+## no meaningful spec possible (e.g. only requires(true)) or deemed not useful to specify
+
+# string formatting
+,alloc::fmt::format,useless
+
+*,core::fmt::Debug::fmt,useless
+*,core::fmt::Display::fmt,useless
+
+,core::fmt::Formatter::write_str,useless
+,core::fmt::Formatter::write_fmt,useless
+,core::fmt::Formatter::debug_struct,useless
+,core::fmt::Formatter::debug_struct_field1_finish,useless
+,core::fmt::Formatter::debug_struct_field2_finish,useless
+,core::fmt::Formatter::debug_struct_field3_finish,useless
+,core::fmt::Formatter::debug_struct_field4_finish,useless
+,core::fmt::Formatter::debug_struct_field5_finish,useless
+,core::fmt::Formatter::debug_struct_fields_finish,useless
+,core::fmt::Formatter::debug_tuple,useless
+,core::fmt::Formatter::debug_tuple_field1_finish,useless
+,core::fmt::Formatter::debug_tuple_field2_finish,useless
+,core::fmt::Formatter::debug_tuple_field3_finish,useless
+,core::fmt::Formatter::debug_list,useless
+,core::fmt::Formatter::debug_map,useless
+,core::fmt::Formatter::debug_set,useless
+,core::fmt::Formatter::pad,useless
+,core::fmt::Formatter::pad_integral,useless
+,core::fmt::Formatter::alternate,useless
+,core::fmt::Formatter::precision,useless
+,core::fmt::Formatter::sign_plus,useless
+,core::fmt::Arguments::new_v1,useless
+,core::fmt::Arguments::new_v1_formatted,useless
+,core::fmt::ArgumentV1::new_display,useless
+,core::fmt::ArgumentV1::new_debug,useless
+,core::fmt::ArgumentV1::new_lower_hex,useless
+,core::fmt::ArgumentV1::new_upper_hex,useless
+,core::fmt::ArgumentV1::from_usize,useless
+,core::fmt::ArgumentV1::new_binary,useless
+,core::fmt::ArgumentV1::new_pointer,useless
+,core::fmt::ArgumentV1::new_octal,useless
+,core::fmt::ArgumentV1::new_lower_exp,useless
+,core::fmt::ArgumentV1::new_upper_exp,useless
+,core::fmt::builders::DebugStruct::field,useless
+,core::fmt::builders::DebugStruct::finish,useless
+,core::fmt::builders::DebugStruct::finish_non_exhaustive,useless
+,core::fmt::builders::DebugTuple::field,useless
+,core::fmt::builders::DebugTuple::finish,useless
+,core::fmt::builders::DebugList::finish,useless
+,core::fmt::builders::DebugList::entries,useless
+,core::fmt::builders::DebugList::entry,useless
+,core::fmt::builders::DebugMap::finish,useless
+,core::fmt::builders::DebugMap::entry,useless
+,core::fmt::builders::DebugMap::entries,useless
+,core::fmt::builders::DebugSet::finish,useless
+,core::fmt::builders::DebugSet::entries,useless
+
+# serde errors (surprisingly common!)
+*,serde::de::Error::invalid_length,useless
+*,serde::de::Error::invalid_type,useless
+*,serde::de::Error::invalid_value,useless
+*,serde::de::Error::unknown_variant,useless
+*,serde::de::Error::unknown_field,useless
+*,serde::de::Error::missing_field,useless
+*,serde::de::Error::duplicate_field,useless
+*,serde::de::Error::end_of_stream,useless
+*,serde::de::Error::custom,useless
+<A as de::SeqAccess<'_>>::Error,core::convert::From::from,useless
+
+# tracing & logging
+log::Level,core::cmp::PartialOrd::le,useless
+,log::max_level,useless
+,log::__private_api_log,useless
+,log::logger,useless
+,log::MetadataBuilder::level,useless
+,log::MetadataBuilder::target,useless
+,log::MetadataBuilder::build,useless
+,log::Metadata::builder,useless
+dyn tracing::log::Log,log::Log::enabled,useless
+
+tracing_core::callsite::DefaultCallsite,tracing_core::callsite::Callsite::metadata,useless
+,tracing_core::metadata::Metadata::fields,useless
+tracing_core::metadata::Level,core::cmp::PartialOrd::le,useless
+tracing_core::field::Iter,core::iter::traits::iterator::Iterator::next,useless
+,tracing_core::field::FieldSet::value_set,useless
+,tracing_core::field::FieldSet::iter,useless
+,tracing_core::field::FieldSet::new,useless
+,tracing_core::subscriber::Interest::is_never,useless
+,tracing_core::metadata::Metadata::new,useless
+,tracing_core::metadata::LevelFilter::current,useless
+,tracing_core::event::Event::dispatch,useless
+tracing::__macro_support::MacroCallsite,tracing_core::callsite::Callsite::metadata,useless
+,tracing_core::dispatcher::has_been_set,useless
+,tracing_core::callsite::DefaultCallsite::new,useless
+,tracing_core::callsite::DefaultCallsite::interest,useless
+,tracing_core::metadata::Metadata::target,useless
+
+## WIP:
+
+# best handled once we figure out the story for iterators
+,&[T]::iter,iterators
+*,core::iter::traits::iterator::Iterator::next,iterators
+*,core::iter::traits::collect::IntoIterator::into_iter,iterators
+*,core::iter::traits::collect::FromIterator::from_iter,iterators
+
+# slices/vecs
+alloc::vec::Vec,core::ops::deref::Deref::deref,planned
+alloc::vec::Vec,core::ops::deref::DerefMut::deref_mut,planned
+,alloc::vec::Vec<T>::new,planned
+,alloc::vec::Vec<T>::with_capacity,planned
+,"alloc::vec::Vec<T, A>::push",planned
+,"alloc::vec::Vec<T, A>::len",planned
+alloc::vec::Vec,core::default::Default::default,planned
+alloc::vec::Vec,core::ops::index::Index::index,planned
+alloc::vec::Vec,core::ops::index::IndexMut::index_mut,planned
+alloc::vec::Vec,core::cmp::PartialEq::eq,planned
+alloc::vec::Vec,core::hash::Hash::hash,planned
+alloc::vec::Vec,core::iter::traits::collect::Extend::extend,planned
+
+# define sizes for common types
+,core::mem::size_of,
+,core::mem::align_of,
+,core::mem::swap,
