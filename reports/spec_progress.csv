@@ -69,83 +69,9 @@ T,core::default::Default::default,
 ,"core::result::Result<T, E>::unwrap_unchecked",
 ,"core::result::Result<T, E>::unwrap_err_unchecked",
 
-# synthesized macro expansion stuff
-#,quote::__private::push_ident,synthesized
-#,quote::__private::push_colon2,synthesized
-#,quote::__private::push_group,synthesized
-#,quote::__private::push_comma,synthesized
-#,quote::__private::push_ident_spanned,synthesized
-#,quote::__private::push_lt,synthesized
-#,quote::__private::push_gt,synthesized
-#,quote::__private::push_colon,synthesized
-#,quote::__private::push_colon2_spanned,synthesized
-#,quote::__private::push_semi,synthesized
-#,quote::__private::push_and,synthesized
-#,quote::__private::push_eq,synthesized
-#,quote::__private::push_dot,synthesized
-#,quote::__private::push_group_spanned,synthesized
-#,quote::__private::push_pound,synthesized
-#,quote::__private::push_rarrow,synthesized
-#,quote::__private::push_fat_arrow,synthesized
-#,quote::__private::push_bang,synthesized
-#,quote::__private::push_dot_spanned,synthesized
-#,quote::__private::push_lifetime,synthesized
-#,quote::__private::push_or,synthesized
-#,quote::__private::push_underscore,synthesized
-#,quote::__private::push_comma_spanned,synthesized
-#,quote::__private::push_semi_spanned,synthesized
-#,quote::__private::push_star,synthesized
-#,quote::__private::push_add,synthesized
-#,quote::__private::push_shr,synthesized
-#,quote::__private::push_lt_spanned,synthesized
-#,quote::__private::push_colon_spanned,synthesized
-#,quote::__private::push_and_spanned,synthesized
-#,quote::__private::push_eq_spanned,synthesized
-#,quote::__private::push_gt_spanned,synthesized
-#,quote::__private::push_dot2,synthesized
-#,quote::__private::push_fat_arrow_spanned,synthesized
-#,quote::__private::push_question_spanned,synthesized
-#,quote::__private::push_bang_spanned,synthesized
-#,quote::__private::push_or_spanned,synthesized
-#,quote::__private::push_question,synthesized
-#,quote::__private::push_rarrow_spanned,synthesized
-#,quote::__private::push_underscore_spanned,synthesized
-#,quote::__private::push_pound_spanned,synthesized
-#,quote::__private::push_lifetime_spanned,synthesized
-#,quote::__private::push_eq_eq,synthesized
-#,quote::__private::push_or_or,synthesized
-#,quote::__private::push_at,synthesized
-#,quote::__private::push_star_spanned,synthesized
-#,quote::__private::push_or_or_spanned,synthesized
-#,quote::__private::push_shr_spanned,synthesized
-#,quote::__private::push_add_spanned,synthesized
-#,quote::__private::push_shl,synthesized
-#,quote::__private::push_and_and,synthesized
-#,quote::__private::push_eq_eq_spanned,synthesized
-#,quote::__private::push_and_and_spanned,synthesized
-#,quote::__private::push_ne,synthesized
-#,quote::__private::push_add_eq,synthesized
-#,quote::__private::push_sub,synthesized
-#,quote::__private::push_rem,synthesized
-#,quote::__private::push_and_eq,synthesized
-#,quote::__private::push_div,synthesized
-#,quote::__private::push_dot3,synthesized
-#,quote::__private::push_ne_spanned,synthesized
-#,quote::__private::push_rem_spanned,synthesized
-#,quote::__private::push_shl_spanned,synthesized
-#,quote::__private::push_ge,synthesized
-#,quote::__private::push_or_eq,synthesized
-#,quote::__private::push_sub_eq,synthesized
-#,quote::__private::push_dot2_spanned,synthesized
-#,quote::__private::push_caret,synthesized
-#,quote::__private::push_caret_spanned,synthesized
-#,quote::__private::push_dot_dot_eq_spanned,synthesized
-# creates a new TokenStream to push tokens to (TODO: which type this is defined in; not sure why it's not being recognized)
-#,proc_macro2::TokenStream::new,synthesized
-
-# synthesized by a popular crate
-#,libsecp256k1_core::field::FieldStorage::new,synthesized
-#,libsecp256k1_core::group::AffineStorage::new,synthesized
+# synthesized by a semi-popular crate
+,libsecp256k1_core::field::FieldStorage::new,synthesized
+,libsecp256k1_core::group::AffineStorage::new,synthesized
 
 # special handling by prusti
 ,&[T]::len,builtin
@@ -154,10 +80,11 @@ T,core::default::Default::default,
 ,std::panicking::begin_panic,builtin
 ,core::panicking::panic_fmt,builtin
 
-# would be interesting as part of a more general story for strings
-alloc::string::String,core::ops::deref::Deref::deref,strings
-str,core::cmp::PartialEq::eq,strings
-str,core::ops::index::Index::index,strings
+# blocked by issue #1221
+*,core::ops::deref::Deref::deref,issue#1221
+*,core::ops::index::Index::index,issue#1221
+str,alloc::string::ToString::to_string,issue#1221
+,alloc::string::String::as_str,issue#1221
 
 # requires handling interior mutability (Arc, Pin, etc.)
 alloc::sync::Arc,core::ops::deref::Deref::deref,interior_mutability
@@ -167,16 +94,25 @@ alloc::sync::Arc,core::ops::deref::Deref::deref,interior_mutability
 ,core::pin::Pin<&T>::get_unchecked_mut,interior_mutability
 core::pin::Pin,core::ops::deref::DerefMut::deref_mut,interior_mutability
 
-## no meaningful spec possible (e.g. only requires(true)) or deemed not useful to specify
+# part of a future async project
+,core::future::get_context,async
+,core::future::from_generator,async
+core::pin::Pin,core::future::future::Future::poll,async
+core::pin::Pin,core::future::into_future::IntoFuture::into_future,async
 
-# string formatting
-,alloc::fmt::format,useless
-
-*,core::fmt::Debug::fmt,useless
-*,core::fmt::Display::fmt,useless
-
+# part of a future strings project
+str,core::cmp::PartialEq::eq,strings
+,alloc::fmt::format,strings
+*,core::fmt::Display::fmt,strings
 ,core::fmt::Formatter::write_str,useless
 ,core::fmt::Formatter::write_fmt,useless
+,core::fmt::ArgumentV1::new_display,useless
+
+## no meaningful spec possible (e.g. only requires(true)) or deemed not useful to specify
+
+# string formatting for logging
+*,core::fmt::Debug::fmt,useless
+
 ,core::fmt::Formatter::debug_struct,useless
 ,core::fmt::Formatter::debug_struct_field1_finish,useless
 ,core::fmt::Formatter::debug_struct_field2_finish,useless
@@ -198,7 +134,6 @@ core::pin::Pin,core::ops::deref::DerefMut::deref_mut,interior_mutability
 ,core::fmt::Formatter::sign_plus,useless
 ,core::fmt::Arguments::new_v1,useless
 ,core::fmt::Arguments::new_v1_formatted,useless
-,core::fmt::ArgumentV1::new_display,useless
 ,core::fmt::ArgumentV1::new_debug,useless
 ,core::fmt::ArgumentV1::new_lower_hex,useless
 ,core::fmt::ArgumentV1::new_upper_hex,useless
