@@ -69,6 +69,18 @@ T,core::default::Default::default,
 ,"core::result::Result<T, E>::unwrap_unchecked",
 ,"core::result::Result<T, E>::unwrap_err_unchecked",
 
+# strings
+alloc::string::String,alloc::string::ToString::to_string,
+# best handled by a holistic approach to strings
+str,core::cmp::PartialEq::eq,strings
+&str,core::cmp::PartialEq::eq,strings
+,alloc::fmt::format,strings
+*,core::fmt::Display::fmt,strings
+,alloc::string::String::push_str,strings
+,alloc::string::String::new,strings
+,str::parse,strings
+,str::len,strings
+
 # synthesized by a semi-popular crate
 ,libsecp256k1_core::field::FieldStorage::new,synthesized
 ,libsecp256k1_core::group::AffineStorage::new,synthesized
@@ -81,10 +93,14 @@ T,core::default::Default::default,
 ,core::panicking::panic_fmt,builtin
 
 # blocked by issue #1221
-*,core::ops::deref::Deref::deref,issue#1221
-*,core::ops::index::Index::index,issue#1221
-str,alloc::string::ToString::to_string,issue#1221
-,alloc::string::String::as_str,issue#1221
+*,core::ops::deref::Deref::deref,issue_1221
+*,core::ops::index::Index::index,issue_1221
+str,alloc::borrow::ToOwned::to_owned,issue_1221
+str,alloc::string::ToString::to_string,issue_1221
+,alloc::string::String::as_str,issue_1221
+,alloc::boxed::Box<T>::new,issue_1221
+,"std::collections::hash::map::HashMap<K, V, S>::insert",issue_1221
+&str,core::convert::Into::into,issue_1221
 
 # requires handling interior mutability (Arc, Pin, etc.)
 alloc::sync::Arc,core::ops::deref::Deref::deref,interior_mutability
@@ -94,25 +110,19 @@ alloc::sync::Arc,core::ops::deref::Deref::deref,interior_mutability
 ,core::pin::Pin<&T>::get_unchecked_mut,interior_mutability
 core::pin::Pin,core::ops::deref::DerefMut::deref_mut,interior_mutability
 
-# part of a future async project
+# best handled by a holistic approach to async
 ,core::future::get_context,async
 ,core::future::from_generator,async
 core::pin::Pin,core::future::future::Future::poll,async
 core::pin::Pin,core::future::into_future::IntoFuture::into_future,async
-
-# part of a future strings project
-str,core::cmp::PartialEq::eq,strings
-,alloc::fmt::format,strings
-*,core::fmt::Display::fmt,strings
-,core::fmt::Formatter::write_str,useless
-,core::fmt::Formatter::write_fmt,useless
-,core::fmt::ArgumentV1::new_display,useless
 
 ## no meaningful spec possible (e.g. only requires(true)) or deemed not useful to specify
 
 # string formatting for logging
 *,core::fmt::Debug::fmt,useless
 
+,core::fmt::Formatter::write_str,useless
+,core::fmt::Formatter::write_fmt,useless
 ,core::fmt::Formatter::debug_struct,useless
 ,core::fmt::Formatter::debug_struct_field1_finish,useless
 ,core::fmt::Formatter::debug_struct_field2_finish,useless
@@ -134,6 +144,7 @@ str,core::cmp::PartialEq::eq,strings
 ,core::fmt::Formatter::sign_plus,useless
 ,core::fmt::Arguments::new_v1,useless
 ,core::fmt::Arguments::new_v1_formatted,useless
+,core::fmt::ArgumentV1::new_display,useless
 ,core::fmt::ArgumentV1::new_debug,useless
 ,core::fmt::ArgumentV1::new_lower_hex,useless
 ,core::fmt::ArgumentV1::new_upper_hex,useless
@@ -202,24 +213,32 @@ tracing::__macro_support::MacroCallsite,tracing_core::callsite::Callsite::metada
 # best handled once we figure out the story for iterators
 ,&[T]::iter,iterators
 *,core::iter::traits::iterator::Iterator::next,iterators
+*,core::iter::traits::iterator::Iterator::collect,iterators
 *,core::iter::traits::collect::IntoIterator::into_iter,iterators
 *,core::iter::traits::collect::FromIterator::from_iter,iterators
 
 # slices/vecs
-alloc::vec::Vec,core::ops::deref::Deref::deref,planned
-alloc::vec::Vec,core::ops::deref::DerefMut::deref_mut,planned
-,alloc::vec::Vec<T>::new,planned
-,alloc::vec::Vec<T>::with_capacity,planned
-,"alloc::vec::Vec<T, A>::push",planned
-,"alloc::vec::Vec<T, A>::len",planned
-alloc::vec::Vec,core::default::Default::default,planned
-alloc::vec::Vec,core::ops::index::Index::index,planned
-alloc::vec::Vec,core::ops::index::IndexMut::index_mut,planned
-alloc::vec::Vec,core::cmp::PartialEq::eq,planned
-alloc::vec::Vec,core::hash::Hash::hash,planned
-alloc::vec::Vec,core::iter::traits::collect::Extend::extend,planned
+alloc::vec::Vec,core::ops::deref::Deref::deref,issue_1221
+alloc::vec::Vec,core::ops::deref::DerefMut::deref_mut,issue_1221
+,alloc::vec::Vec<T>::new,
+,alloc::vec::Vec<T>::with_capacity,
+,"alloc::vec::Vec<T, A>::push",issue_1221
+,"alloc::vec::Vec<T, A>::len",issue_1221
+alloc::vec::Vec,core::default::Default::default,
+alloc::vec::Vec,core::ops::index::Index::index,issue_1221
+alloc::vec::Vec,core::ops::index::IndexMut::index_mut,issue_1221
+alloc::vec::Vec,core::cmp::PartialEq::eq,issue_1221
+alloc::vec::Vec,core::iter::traits::collect::Extend::extend,issue_1221
 
 # define sizes for common types
 ,core::mem::size_of,
 ,core::mem::align_of,
 ,core::mem::swap,
+
+# unlikely to be ever specified
+,core::intrinsics::foreign::transmute,transmutation
+
+# best handled holistically together with call descriptions
+*,core::ops::function::Fn::call,calls
+*,core::ops::function::FnMut::call_mut,calls
+*,core::ops::function::FnOnce::call_once,calls
