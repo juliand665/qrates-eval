@@ -208,14 +208,13 @@ tracing::__macro_support::MacroCallsite,tracing_core::callsite::Callsite::metada
 ,tracing_core::callsite::DefaultCallsite::interest,useless
 ,tracing_core::metadata::Metadata::target,useless
 
-## WIP:
-
 # best handled once we figure out the story for iterators
 ,&[T]::iter,iterators
 *,core::iter::traits::iterator::Iterator::next,iterators
 *,core::iter::traits::iterator::Iterator::collect,iterators
 *,core::iter::traits::collect::IntoIterator::into_iter,iterators
 *,core::iter::traits::collect::FromIterator::from_iter,iterators
+*,core::iter::traits::iterator::Iterator::map,iterators
 
 # slices/vecs
 alloc::vec::Vec,core::ops::deref::Deref::deref,issue_1221
