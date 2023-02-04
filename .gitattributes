@@ -1,0 +1,2 @@
+reports/*/*.csv filter=lfs diff=lfs merge=lfs -text
+reports/*/*.csv.gz filter=lfs diff=lfs merge=lfs -text

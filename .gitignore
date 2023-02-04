@@ -2,9 +2,12 @@
 *
 # well, almost everything
 !.gitignore
+!.gitattributes
 
 # but descend into reports
 !reports/
+!reports/resolved-calls
+!reports/resolved-calls/*.csv.gz
 !*.ipynb
 # progress files
 !spec_progress.csv
