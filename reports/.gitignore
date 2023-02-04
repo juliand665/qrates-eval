@@ -1,0 +1,14 @@
+# Ignore everything by default
+*
+# well, almost everything
+!.gitignore
+!.gitattributes
+
+# the central notebook
+!*.ipynb
+# query output
+!resolved-calls
+!resolved-calls/*.csv.gz
+# progress files
+!spec_progress.csv
+!reports/*.txt

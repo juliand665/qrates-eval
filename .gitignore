@@ -1,18 +1,6 @@
-# Ignore everything by default
-*
-# well, almost everything
-!.gitignore
-!.gitattributes
-
-# but descend into reports
-!reports/
-!reports/resolved-calls
-!reports/resolved-calls/*.csv.gz
-!*.ipynb
-# progress files
-!spec_progress.csv
-!reports/*.txt
-
-# and scripts
-!scripts
-!scripts/**
+# ignore extra stuff in the qrates workspace
+/builds/
+/cargo-home/
+/database/
+/rust-corpus/
+/lock
