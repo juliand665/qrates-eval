@@ -7,12 +7,11 @@ core::option::Option,core::ops::try_trait::FromResidual::from_residual,
 
 *,core::clone::Clone::clone,
 
-T,core::default::Default::default,
-
 # categorizing all these as the same so we can specifically investigate this subset
 # specifying behavior for specific generics is not really possible in this format
 *,core::convert::From::from,convert
 *,core::convert::Into::into,convert
+*,core::default::Default::default,default
 
 # impl Option
 ,core::option::Option<T>::is_some,
@@ -216,7 +215,6 @@ alloc::vec::Vec,core::ops::deref::DerefMut::deref_mut,issue_1221
 ,alloc::vec::Vec<T>::with_capacity,
 ,"alloc::vec::Vec<T, A>::push",issue_1221
 ,"alloc::vec::Vec<T, A>::len",issue_1221
-alloc::vec::Vec,core::default::Default::default,
 alloc::vec::Vec,core::ops::index::Index::index,issue_1221
 alloc::vec::Vec,core::ops::index::IndexMut::index_mut,issue_1221
 alloc::vec::Vec,core::cmp::PartialEq::eq,issue_1221
