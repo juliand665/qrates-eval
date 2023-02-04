@@ -1,0 +1,15 @@
+# Ignore everything by default
+*
+# well, almost everything
+!.gitignore
+
+# but descend into reports
+!reports/
+!*.ipynb
+# progress files
+!spec_progress.csv
+!reports/*.txt
+
+# and scripts
+!scripts
+!scripts/**
